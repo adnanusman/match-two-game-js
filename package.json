@@ -1,0 +1,11 @@
+{
+  "name": "match-two-game-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/adnanusman/match-two-game-js.git",
+  "author": "Adnan Usman <adnantu@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
