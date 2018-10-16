@@ -1,1 +1,1 @@
-.card-container{display:-ms-flexbox;display:flex}.card{-ms-flex:1;flex:1;text-align:center}
+h1{text-align:center}.card-container{display:-ms-flexbox;display:flex;max-width:1080px;margin-right:auto;margin-left:auto}.card{-ms-flex:1;flex:1;margin-right:auto;margin-left:auto;width:100px;height:250px;border-radius:5px;background:#409bcf;margin:5px}
