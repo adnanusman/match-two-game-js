@@ -2,20 +2,47 @@ h1 {
   text-align: center;
 }
 
-.card-container {
-  display: flex;
+.wrapper {
   max-width: 1080px;
+  display: flex;
   margin-right: auto;
   margin-left: auto;
 }
 
-.card {
-  flex: 1;
+.card-container {
+  width: 150px;
+  height: 250px;
+  margin: 10px;
   margin-right: auto;
   margin-left: auto;
-  width: 100px;
+}
+
+.card-front {
+  position: absolute;
+  transform: perspective(600px) rotateY(0deg); 
+  width: 150px;
   height: 250px;
   border-radius: 5px;
   background: rgb(64, 155, 207);
-  margin: 5px;
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
 }
+
+.card-back {
+  position: absolute;
+  transform: perspective(600px) rotateY(180deg); 
+  width: 150px;
+  height: 250px;
+  border-radius: 5px;
+  background: rgb(0 , 0, 0);
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
+}
+
+/* .card-container:hover > .card-front {
+  transform: perspective(600px) rotateY(-180deg);
+}
+
+.card-container:hover > .card-back {
+  transform: perspective(600px) rotateY(0deg);
+} */

@@ -3,9 +3,16 @@ const browserSync = require('browser-sync').create();
 const cssnano = require('gulp-cssnano');
 const autoprefixer = require('gulp-autoprefixer');
 
+// Copy over all the HTML to the build folder
 gulp.task('copy-html', function() {
-  gulp.src('src/index.html')
+  gulp.src('src/*.html')
   .pipe(gulp.dest('build'))
+})
+
+// Copy over all the JS to the build folder
+gulp.task('copy-js', function() {
+  gulp.src('src/js/*.js')
+  .pipe(gulp.dest('build/js'))
 })
 
 // Serve Application on localhost
@@ -30,8 +37,9 @@ gulp.task('min-css', function() {
 
 // Watch files for changes
 gulp.task('watch', function() {
+  gulp.watch('src/js/*.js', ['copy-js']).on('change', browserSync.reload);
   gulp.watch('src/css/*.css', ['min-css']).on('change', browserSync.reload);
   gulp.watch('src/*.html', ['copy-html']).on('change', browserSync.reload);
 })
 
-gulp.task('default', ['copy-html', 'serve', 'watch']);
+gulp.task('default', ['copy-html', 'copy-js', 'serve', 'watch']);
