@@ -30,9 +30,18 @@ var matchTwoApp = {
         // If there are 2 cards in flipped condition.
         if(app.activeCards.length === 2) {
           changeState.then(function() {
-            setTimeout(function() {
-              app.resetCards();
-            }, 500);
+
+            var cardback1 = app.activeCards[0].cardBack;
+            var cardback2 = app.activeCards[1].cardBack;
+
+            if(cardback1.style.background === cardback2.style.background) {
+              app.clearCards();
+              return;
+            } else {
+              setTimeout(function() {
+                app.resetCards();
+              }, 500);
+            }
           })
         }
 
