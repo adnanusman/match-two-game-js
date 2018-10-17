@@ -1,9 +1,11 @@
 var matchTwoApp = {
   activeCards: [],
+  randomColors: [],
   score: 0,
   init: function() {
     this.cardFrontEventListeners();
     this.cardBackEventListeners();
+    this.assignRandomColors();
   },
   // Setup Event Listeners for the front side of the card.
   cardFrontEventListeners: function() {
@@ -52,7 +54,7 @@ var matchTwoApp = {
     var cardbacks = document.querySelectorAll('.card-back');
     var app = this;
     // Add event listeners on all the cards backs.
-    for(i = 0; i < cardbacks.length; i++) {
+    for(var i = 0; i < cardbacks.length; i++) {
       cardbacks[i].addEventListener('click', function(e) {
         var cardBack = e.target;
         var cardFront = e.target.nextElementSibling;
@@ -68,11 +70,44 @@ var matchTwoApp = {
     this.activeCards = [];
   },
   resetCards: function() {
+    // set the cards back to their original state.
     this.activeCards.forEach(card => {
       card.cardBack.style.transform = '';
       card.cardFront.style.transform = '';
     })
     this.clearCards();
+  },
+  assignRandomColors: function() {
+    // select all the backs of the cards
+    var cardbacks = document.querySelectorAll('.card-back');
+    var color;
+    
+    // Add 6 random hexcodes to the randomColors array.
+    for(var i = 0; i < 6; i++) { 
+      color = this.generateRandomHexcode();
+      this.randomColors.push(color);
+    }
+
+    // Assign the colors to the cards.
+    for(var j = 0; j < cardbacks.length; j++) {
+      var randomNumber = Math.floor(Math.random() * 6);
+      cardbacks[j].style.background = this.randomColors[randomNumber];
+    }
+  },
+  generateRandomHexcode: function() {
+    // all the numbers and letters that can be used in hex codes
+    var validHexcodeDigits = '1234567890ABCDEF';
+
+    // add the hash tag required in hex codes.
+    var color = '#';
+
+    // run a loop 6 times generating 6 digits/letters that make up a hex code.
+    for(var i=0; i<6; i++) {
+      color += validHexcodeDigits[Math.floor(Math.random() * 16)]
+    }
+
+    // return the color
+    return color;
   }
 }
 
