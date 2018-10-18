@@ -94,13 +94,16 @@ var matchTwoApp = {
     // Add 6 random hexcodes to the randomColors array.
     for(var i = 0; i < 6; i++) { 
       color = this.generateRandomHexcode();
+      // Add each color to the array twice.
+      this.randomColors.push(color);
       this.randomColors.push(color);
     }
 
+    // create an array of numbers and shuffle them so colors are distributed randomly.
+    var numbers = this.shuffle([0,1,2,3,4,5,6,7,8,9,10,11]);
     // Assign the colors to the cards.
     for(var j = 0; j < cardbacks.length; j++) {
-      var randomNumber = Math.floor(Math.random() * 6);
-      cardbacks[j].style.background = this.randomColors[randomNumber];
+      cardbacks[j].style.background = this.randomColors[numbers[j]];
     }
   },
   generateRandomHexcode: function() {
@@ -117,6 +120,22 @@ var matchTwoApp = {
 
     // return the color
     return color;
+  },
+  // got this shuffle function from https://stackoverflow.com/questions/18806210/generating-non-repeating-random-numbers-in-js
+  shuffle: function(array) {
+    var i = array.length,
+    j = 0,
+    temp;
+
+    while (i--) {
+      j = Math.floor(Math.random() * (i+1));
+
+      // swap randomly chosen element with current element
+      temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
   }
 }
 
