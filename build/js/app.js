@@ -4,7 +4,7 @@ var matchTwoApp = {
   score: 0,
   init: function() {
     this.cardFrontEventListeners();
-    this.cardBackEventListeners();
+    // this.cardBackEventListeners();
     this.assignRandomColors();
   },
   // Setup Event Listeners for the front side of the card.
@@ -59,22 +59,22 @@ var matchTwoApp = {
       })
     }
   },
-  cardBackEventListeners: function() {
-    var cardbacks = document.querySelectorAll('.card-back');
-    var app = this;
-    // Add event listeners on all the cards backs.
-    for(var i = 0; i < cardbacks.length; i++) {
-      cardbacks[i].addEventListener('click', function(e) {
-        var cardBack = e.target;
-        var cardFront = e.target.nextElementSibling;
+  // cardBackEventListeners: function() {
+  //   var cardbacks = document.querySelectorAll('.card-back');
+  //   var app = this;
+  //   // Add event listeners on all the cards backs.
+  //   for(var i = 0; i < cardbacks.length; i++) {
+  //     cardbacks[i].addEventListener('click', function(e) {
+  //       var cardBack = e.target;
+  //       var cardFront = e.target.nextElementSibling;
         
-        // Flip the cards back to normal state.
-        cardFront.style.transform = 'perspective(600px) rotateY(0deg)';
-        cardBack.style.transform = 'perspective(600px) rotateY(180deg)';
-        app.clearCards();
-      })
-    }
-  },
+  //       // Flip the cards back to normal state.
+  //       cardFront.style.transform = 'perspective(600px) rotateY(0deg)';
+  //       cardBack.style.transform = 'perspective(600px) rotateY(180deg)';
+  //       app.clearCards();
+  //     })
+  //   }
+  // },
   clearCards: function() {
     this.activeCards = [];
   },

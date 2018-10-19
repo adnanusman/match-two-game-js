@@ -5,21 +5,21 @@ h1 {
 .wrapper {
   max-width: 1080px;
   display: flex;
-  margin-right: auto;
-  margin-left: auto;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: auto;
 }
 
 .card-container {
   width: 150px;
   height: 250px;
-  margin: 10px;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 10px 15px;
+  margin: 0;
 }
 
 .card-front {
   position: absolute;
-  transform: perspective(600px) rotateY(0deg); 
+  transform: perspective(600px) rotateY(0deg);
   width: 150px;
   height: 250px;
   border-radius: 5px;
@@ -30,7 +30,7 @@ h1 {
 
 .card-back {
   position: absolute;
-  transform: perspective(600px) rotateY(180deg); 
+  transform: perspective(600px) rotateY(180deg);
   width: 150px;
   height: 250px;
   border-radius: 5px;
@@ -39,11 +39,11 @@ h1 {
   transition: transform .5s linear 0s;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .wrapper {
     flex-direction: column;
   }
-}
+} */
 
 /* .card-container:hover > .card-front {
   transform: perspective(600px) rotateY(-180deg);
