@@ -15,6 +15,12 @@ gulp.task('copy-js', function() {
   .pipe(gulp.dest('build/js'))
 })
 
+// Copy the service worker to the build folder
+gulp.task('copy-sw', function() {
+  gulp.src('src/*.js')
+  .pipe(gulp.dest('build/'))
+})
+
 // Serve Application on localhost
 gulp.task('serve', function() {
   browserSync.init({
@@ -40,6 +46,7 @@ gulp.task('watch', function() {
   gulp.watch('src/js/*.js', ['copy-js']).on('change', browserSync.reload);
   gulp.watch('src/css/*.css', ['min-css']).on('change', browserSync.reload);
   gulp.watch('src/*.html', ['copy-html']).on('change', browserSync.reload);
+  gulp.watch('src/*.js', ['copy-sw']).on('change', browserSync.reload);
 })
 
-gulp.task('default', ['copy-html', 'copy-js', 'serve', 'watch']);
+gulp.task('default', ['copy-html', 'copy-js', 'copy-sw', 'serve', 'watch']);
