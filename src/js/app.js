@@ -1,4 +1,4 @@
-var app = new Game;
+var matchTwoApp = new Game;
 
-app.cardFrontEventListeners();
-app.assignRandomColors();
+matchTwoApp.assignRandomColors();
+matchTwoApp.setupEventListeners();

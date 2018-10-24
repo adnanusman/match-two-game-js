@@ -6,6 +6,11 @@ class Game {
   } 
 }
 
+Game.prototype.setupEventListeners = function() {
+  this.backEventListeners();
+  this.cardFrontEventListeners();
+}
+
 Game.prototype.cardFrontEventListeners = function() {
   var cardfronts = document.querySelectorAll('.card-front');
   var app = this;
@@ -42,6 +47,24 @@ Game.prototype.cardFrontEventListeners = function() {
           }
         })
       }
+    })
+  }
+}
+
+// This is not being used but I wanted to carry it over just in case.
+Game.prototype.backEventListeners = function() {
+  var cardbacks = document.querySelectorAll('.card-back');
+  var app = this;
+  // Add event listeners on all the cards backs.
+  for(var i = 0; i < cardbacks.length; i++) {
+    cardbacks[i].addEventListener('click', function(e) {
+      var cardBack = e.target;
+      var cardFront = e.target.nextElementSibling;
+      
+      // Flip the cards back to normal state.
+      cardFront.style.transform = 'perspective(600px) rotateY(0deg)';
+      cardBack.style.transform = 'perspective(600px) rotateY(180deg)';
+      app.clearCards();
     })
   }
 }
