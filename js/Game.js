@@ -3,6 +3,10 @@ class Game {
     this.activeCards = [];
     this.randomColors = [];
     this.score = 0;
+
+    this.assignRandomColors();
+    this.setupEventListeners();
+    this.updateScore();
   } 
 }
 
@@ -38,6 +42,8 @@ Game.prototype.cardFrontEventListeners = function() {
           var cardback2 = app.activeCards[1].cardBack;
 
           if(cardback1.style.background === cardback2.style.background) {
+            app.score += 2;
+            app.updateScore();
             app.clearCards();
             return;
           } else {
@@ -134,4 +140,11 @@ Game.prototype.shuffle = function(array) {
     array[j] = temp;
   }
   return array;
+}
+
+Game.prototype.updateScore = function() {
+  var scoreDiv = document.querySelector('.score');
+
+  console.log(this.score);
+  scoreDiv.innerHTML = 'SCORE: ' + this.score;
 }
