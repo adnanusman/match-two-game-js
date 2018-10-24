@@ -6,6 +6,7 @@ var matchTwoApp = {
     this.cardFrontEventListeners();
     // this.cardBackEventListeners();
     this.assignRandomColors();
+    this.registerServiceWorker();
   },
   // Setup Event Listeners for the front side of the card.
   cardFrontEventListeners: function() {
@@ -136,6 +137,17 @@ var matchTwoApp = {
       array[j] = temp;
     }
     return array;
+  },
+  registerServiceWorker: function() {
+    // Add Service Worker to the application.
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+      .then( (reg) => {
+        console.log('Registration successful');
+      }).catch( (error) => {
+        console.log('Registration failed', error);
+      });
+    }
   }
 }
 
