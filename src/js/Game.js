@@ -7,7 +7,7 @@ class Game {
     this.assignRandomColors();
     this.setupEventListeners();
     this.updateScore();
-  } 
+  }
 }
 
 Game.prototype.setupEventListeners = function() {
@@ -66,7 +66,7 @@ Game.prototype.backEventListeners = function() {
     cardbacks[i].addEventListener('click', function(e) {
       var cardBack = e.target;
       var cardFront = e.target.nextElementSibling;
-      
+
       // Flip the cards back to normal state.
       cardFront.style.transform = 'perspective(600px) rotateY(0deg)';
       cardBack.style.transform = 'perspective(600px) rotateY(180deg)';
@@ -93,12 +93,17 @@ Game.prototype.assignRandomColors = function() {
   var cardbacks = document.querySelectorAll('.card-back');
   var color;
 
-  // Add 6 random hexcodes to the randomColors array.
-  for(var i = 0; i < 6; i++) { 
-    color = this.generateRandomHexcode();
+  // array of colors to choose from
+  var colorOptions = ['#333', '#666', '#999', '#ccc', '#000033', '#000066', '#000099', '#0000cc', '#0000ff', '#003300', '#006600', '#009900', '#00cc00', '#00ff00', '#00ffcc', '#00ccff', '#00ffff', '#330000', '#660000', '#990000', '#cc0000', '#ff0000', '#660066', '#660099', '#9900ff', '#ccff00', '#ccffcc', '#99ff00', '#ff9900', '#ffcc33'];
+
+  // Add 6 unique colors to the randomColors array.
+  for(var i = 0; i < 6; i++) {
+    let int = colorOptions.length;
+    var num = Math.floor(Math.random() * int);
     // Add each color to the array twice.
-    this.randomColors.push(color);
-    this.randomColors.push(color);
+    this.randomColors.push(colorOptions[num]);
+    this.randomColors.push(colorOptions[num]);
+    colorOptions.splice(num, 1);
   }
 
   // create an array of numbers and shuffle them so colors are distributed randomly.
@@ -107,22 +112,6 @@ Game.prototype.assignRandomColors = function() {
   for(var j = 0; j < cardbacks.length; j++) {
     cardbacks[j].style.background = this.randomColors[numbers[j]];
   }
-}
-
-Game.prototype.generateRandomHexcode = function() {
-  // all the numbers and letters that can be used in hex codes
-  var validHexcodeDigits = '1234567890ABCDEF';
-
-  // add the hash tag required in hex codes.
-  var color = '#';
-
-  // run a loop 6 times generating 6 digits/letters that make up a hex code.
-  for(var i=0; i<6; i++) {
-    color += validHexcodeDigits[Math.floor(Math.random() * 16)]
-  }
-
-  // return the color
-  return color;
 }
 
 // got this shuffle function from https://stackoverflow.com/questions/18806210/generating-non-repeating-random-numbers-in-js
