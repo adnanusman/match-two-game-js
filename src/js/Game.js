@@ -11,7 +11,8 @@ class Game {
 }
 
 Game.prototype.setupEventListeners = function() {
-  this.backEventListeners();
+  // Disabled back event listeners to avoid cheating/additional scoring by re-flipping matched cards.
+  // this.backEventListeners();
   this.cardFrontEventListeners();
 }
 
