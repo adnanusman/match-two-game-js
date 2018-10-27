@@ -92,10 +92,38 @@ Game.prototype.resetCards = function() {
 Game.prototype.assignRandomColors = function() {
   // select all the backs of the cards
   var cardbacks = document.querySelectorAll('.card-back');
-  // var color;
 
   // array of colors to choose from
-  var colorOptions = ['#f9ccca', '#ea9399', '#e4717a', '#ab4e52', '#be0032', '#841b2d', '#fab57f', '#f38400', '#be6516', '#a67b5b', '#80461b', '#593319', '#fada5e', '#f3c300', '#d4af37', '#83d37d', '#27a64c', '#00622d', '#a1caf1', '#00a1c2', '#0067a5', '#d399e6', '#9a4eae', '#602f6b', '#bbb', '#555', '#222'];
+  // TODO: Change this so it imports from a JSON file instead.
+  var colorOptions = [
+    '#f9ccca', 
+    '#ea9399', 
+    '#e4717a', 
+    '#ab4e52', 
+    '#be0032', 
+    '#841b2d', 
+    '#fab57f', 
+    '#f38400', 
+    '#be6516', 
+    '#a67b5b', 
+    '#80461b', 
+    '#593319', 
+    '#fada5e', 
+    '#f3c300', 
+    '#d4af37', 
+    '#83d37d', 
+    '#27a64c', 
+    '#00622d', 
+    '#a1caf1', 
+    '#00a1c2', 
+    '#0067a5', 
+    '#d399e6', 
+    '#9a4eae', 
+    '#602f6b', 
+    '#bbb', 
+    '#555', 
+    '#222'
+  ];
 
   // Add 6 unique colors to the randomColors array.
   for(var i = 0; i < 6; i++) {
