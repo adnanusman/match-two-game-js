@@ -14,6 +14,7 @@ Game.prototype.setupEventListeners = function() {
   // Disabled back event listeners to avoid cheating/additional scoring by re-flipping matched cards.
   // this.backEventListeners();
   this.cardFrontEventListeners();
+  this.gameResetEventListeners();
 }
 
 Game.prototype.cardFrontEventListeners = function() {
@@ -76,6 +77,14 @@ Game.prototype.backEventListeners = function() {
   }
 }
 
+Game.prototype.gameResetEventListeners = function() {
+  var button = document.getElementById('reset');
+  button.addEventListener('click', () => {
+    // location.reload();
+    this.resetGame();
+  })
+}
+
 Game.prototype.clearCards = function() {
   this.activeCards = [];
 }
@@ -89,6 +98,18 @@ Game.prototype.resetCards = function() {
   this.clearCards();
 }
 
+Game.prototype.resetGame = function() {
+  var cards = document.querySelectorAll('.card-container');
+  // set all cards back to their original state.
+  cards.forEach(card => {
+    let front = card.childNodes[3];
+    let back = card.childNodes[1];
+    front.style.transform = '';
+    back.style.transform = '';
+  });
+  new Game;
+}
+
 Game.prototype.assignRandomColors = function() {
   // select all the backs of the cards
   var cardbacks = document.querySelectorAll('.card-back');
@@ -96,32 +117,32 @@ Game.prototype.assignRandomColors = function() {
   // array of colors to choose from
   // TODO: Change this so it imports from a JSON file instead.
   var colorOptions = [
-    '#f9ccca', 
-    '#ea9399', 
-    '#e4717a', 
-    '#ab4e52', 
-    '#be0032', 
-    '#841b2d', 
-    '#fab57f', 
-    '#f38400', 
-    '#be6516', 
-    '#a67b5b', 
-    '#80461b', 
-    '#593319', 
-    '#fada5e', 
-    '#f3c300', 
-    '#d4af37', 
-    '#83d37d', 
-    '#27a64c', 
-    '#00622d', 
-    '#a1caf1', 
-    '#00a1c2', 
-    '#0067a5', 
-    '#d399e6', 
-    '#9a4eae', 
-    '#602f6b', 
-    '#bbb', 
-    '#555', 
+    '#f9ccca',
+    '#ea9399',
+    '#e4717a',
+    '#ab4e52',
+    '#be0032',
+    '#841b2d',
+    '#fab57f',
+    '#f38400',
+    '#be6516',
+    '#a67b5b',
+    '#80461b',
+    '#593319',
+    '#fada5e',
+    '#f3c300',
+    '#d4af37',
+    '#83d37d',
+    '#27a64c',
+    '#00622d',
+    '#a1caf1',
+    '#00a1c2',
+    '#0067a5',
+    '#d399e6',
+    '#9a4eae',
+    '#602f6b',
+    '#bbb',
+    '#555',
     '#222'
   ];
 

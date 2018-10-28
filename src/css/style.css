@@ -64,11 +64,32 @@ h1 {
   padding: 10px 0;
   margin: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-content: center;
+  align-items: baseline;
 }
 
 .score {
   font-size: 22px;
   font-weight: 900;
+  /* temp additions until levels added  */
+  width: 50%;
+  text-align: right;
+  line-height: 1.5;
+}
+
+#reset {
+  border-radius: 7px;
+  margin-right: 15px;
+  padding: 5px 10px;
+  background-color: #444;
+  color: #eee;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .1em;
+}
+
+#reset:hover {
+  background-color: #eee;
+  color: #444;
 }
