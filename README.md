@@ -13,4 +13,6 @@ Contributions are always welcome even though this is a very basic game.
 
 To contribute, fork this repo, then make the changes you need to make.
 
-Once the changes are done, commit them and then send me a Pull Request on the 'Temp' branch.
+Please make sure you're editing the `dev` branch and not the `Master` Branch.
+
+Once the changes are done, commit them and then send me a Pull Request on the `dev` branch.
