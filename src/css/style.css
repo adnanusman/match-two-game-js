@@ -6,7 +6,7 @@ h1 {
   text-align: center;
 }
 
-.wrapper {
+#wrapper {
   max-width: 1080px;
   display: flex;
   flex-flow: row wrap;

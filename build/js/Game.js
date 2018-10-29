@@ -4,9 +4,26 @@ class Game {
     this.randomColors = [];
     this.score = 0;
 
+    this.addCards(12);
     this.assignRandomColors();
     this.setupEventListeners();
     this.updateScore();
+  }
+}
+
+Game.prototype.addCards = function(cardsNum) {
+  console.log("Number of cards: ", cardsNum);
+  for(i = 0; i < cardsNum; i++) {
+    var wrapper = document.getElementById('wrapper');
+    var container = document.createElement('div');
+    container.className = 'card-container';
+    var back = document.createElement('div');
+    back.className = 'card-back';
+    container.appendChild(back);
+    var front = document.createElement('div');
+    front.className = 'card-front';
+    container.appendChild(front);
+    wrapper.appendChild(container);
   }
 }
 
@@ -102,8 +119,8 @@ Game.prototype.resetGame = function() {
   var cards = document.querySelectorAll('.card-container');
   // set all cards back to their original state.
   cards.forEach(card => {
-    let front = card.childNodes[3];
-    let back = card.childNodes[1];
+    let front = card.childNodes[1];
+    let back = card.childNodes[0];
     front.style.transform = '';
     back.style.transform = '';
   });
