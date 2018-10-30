@@ -15,6 +15,12 @@ gulp.task('copy-js', function() {
   .pipe(gulp.dest('build/js'))
 })
 
+// Copy over all the images to the build folder
+gulp.task('copy-img', function() {
+  gulp.src('src/img/*.svg')
+  .pipe(gulp.dest('build/img'))
+})
+
 // Serve Application on localhost
 gulp.task('serve', function() {
   browserSync.init({
@@ -38,8 +44,9 @@ gulp.task('min-css', function() {
 // Watch files for changes
 gulp.task('watch', function() {
   gulp.watch('src/js/*.js', ['copy-js']).on('change', browserSync.reload);
+  gulp.watch('src/img/*.svg', ['copy-img']).on('change', browserSync.reload);
   gulp.watch('src/css/*.css', ['min-css']).on('change', browserSync.reload);
   gulp.watch('src/*.html', ['copy-html']).on('change', browserSync.reload);
 })
 
-gulp.task('default', ['copy-html', 'copy-js', 'serve', 'watch']);
+gulp.task('default', ['copy-html', 'copy-js', 'copy-img', 'serve', 'watch']);
