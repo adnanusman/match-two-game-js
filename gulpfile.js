@@ -15,6 +15,12 @@ gulp.task('copy-js', function() {
   .pipe(gulp.dest('build/js'))
 })
 
+// Copy over all the data to the build folder
+gulp.task('copy-data', function() {
+  gulp.src('src/data/*.json')
+  .pipe(gulp.dest('build/data'))
+})
+
 // Serve Application on localhost
 gulp.task('serve', function() {
   browserSync.init({
@@ -42,4 +48,4 @@ gulp.task('watch', function() {
   gulp.watch('src/*.html', ['copy-html']).on('change', browserSync.reload);
 })
 
-gulp.task('default', ['copy-html', 'copy-js', 'serve', 'watch']);
+gulp.task('default', ['copy-html', 'copy-js', 'copy-data', 'serve', 'watch']);
