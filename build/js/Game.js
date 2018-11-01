@@ -4,17 +4,20 @@ class Game {
     this.randomColors = [];
     this.score = 0;
 
-    this.addCards(12);
-    this.assignRandomColors();
-    this.setupEventListeners();
+    this.levelSelect();
+    this.addCards(6);  // Set to default # of cards
     this.updateScore();
   }
 }
 
-Game.prototype.addCards = function(cardsNum) {
-  console.log("Number of cards: ", cardsNum);
+Game.prototype.addCards = function(num) {
+  // Empty the cards wrapper
+  var wrapper = document.getElementById('wrapper');
+  wrapper.innerHTML = "";
+
+  // Add requested number of cards
+  var cardsNum = num * 2;
   for(i = 0; i < cardsNum; i++) {
-    var wrapper = document.getElementById('wrapper');
     var container = document.createElement('div');
     container.className = 'card-container';
     var back = document.createElement('div');
@@ -25,13 +28,47 @@ Game.prototype.addCards = function(cardsNum) {
     container.appendChild(front);
     wrapper.appendChild(container);
   }
+  // Add color values to card pairs
+  this.assignRandomColors(cardsNum);
+  this.cardFrontEventListeners();
+  this.levelChoiceEventListeners();
+  this.gameResetEventListeners();
 }
 
+Game.prototype.levelSelect = function() {
+  var selectsDiv = document.getElementById('selects');
+  // Don't build it if it exists
+  if(selectsDiv.childNodes.length !== 0 ) { return; }
+
+  var label = document.createElement('label');
+  label.setAttribute('for', 'levels');
+  label.className = 'levels-label';
+  label.innerHTML = 'LEVEL:';
+  selectsDiv.append(label);
+  var select = document.createElement('select');
+  select.id = 'levels';
+  var level = 1;
+  for(let i = 6; i < 16; i++) {
+    var option = document.createElement('option');
+    option.name = level
+    option.value = i;
+    option.innerHTML = level;
+    if(i === 6) {
+      option.selected = true;
+    }
+    select.append(option);
+    level++;
+  }
+  selectsDiv.append(select);
+}
+
+// Left it in case decide to change how handled
 Game.prototype.setupEventListeners = function() {
   // Disabled back event listeners to avoid cheating/additional scoring by re-flipping matched cards.
   // this.backEventListeners();
   this.cardFrontEventListeners();
   this.gameResetEventListeners();
+  this.levelChoiceEventListeners();
 }
 
 Game.prototype.cardFrontEventListeners = function() {
@@ -95,10 +132,16 @@ Game.prototype.backEventListeners = function() {
 }
 
 Game.prototype.gameResetEventListeners = function() {
-  var button = document.getElementById('reset');
-  button.addEventListener('click', () => {
-    // location.reload();
+  var reset = document.getElementById('reset');
+  reset.addEventListener('click', () => {
     this.resetGame();
+  })
+}
+
+Game.prototype.levelChoiceEventListeners = function() {
+  var levels = document.getElementById('levels');
+  levels.addEventListener('change', (e) => {
+    this.addCards(e.target.value);
   })
 }
 
@@ -124,10 +167,16 @@ Game.prototype.resetGame = function() {
     front.style.transform = '';
     back.style.transform = '';
   });
-  new Game;
+  // Add cards maintaining current level
+  var levels = document.getElementById('levels').value;
+  this.addCards(levels);
+  // Reset the score
+  this.score = 0;
+  var scoreDiv = document.querySelector('.score');
+  scoreDiv.innerHTML = 'SCORE: ' + this.score;
 }
 
-Game.prototype.assignRandomColors = function() {
+Game.prototype.assignRandomColors = function(cards) {
   // select all the backs of the cards
   var cardbacks = document.querySelectorAll('.card-back');
 
@@ -138,7 +187,7 @@ Game.prototype.assignRandomColors = function() {
     var colors = Object.values(response)[0];
 
     // Add 6 unique colors to the randomColors array.
-    for(var i = 0; i < 6; i++) {
+    for(var i = 0; i < cards; i++) {
       let int = colors.length;
       var num = Math.floor(Math.random() * int);
       // Add each color to the array twice.
@@ -148,7 +197,8 @@ Game.prototype.assignRandomColors = function() {
     }
 
     // create an array of numbers and shuffle them so colors are distributed randomly.
-    var numbers = this.shuffle([0,1,2,3,4,5,6,7,8,9,10,11]);
+    var numbers = this.shuffle(Array.apply(null, {length: cards}).map(Number.call, Number));
+
     // Assign the colors to the cards.
     for(var j = 0; j < cardbacks.length; j++) {
       cardbacks[j].style.background = this.randomColors[numbers[j]];
