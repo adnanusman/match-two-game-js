@@ -19,6 +19,7 @@ gulp.task('copy-js', function() {
 gulp.task('copy-img', function() {
   gulp.src('src/img/*.svg')
   .pipe(gulp.dest('build/img'))
+})
 
 // Copy over all the data to the build folder
 gulp.task('copy-data', function() {
