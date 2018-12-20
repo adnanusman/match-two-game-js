@@ -27,7 +27,8 @@ h1 {
   width: 150px;
   height: 250px;
   border-radius: 5px;
-  background: rgb(64, 155, 207);
+  background: url('../img/swirly_pattern.svg');
+  background-size: auto 100%;
   backface-visibility: hidden;
   transition: transform .5s linear 0s;
 }
