@@ -55,4 +55,4 @@ gulp.task('watch', function() {
   gulp.watch('src/*.html', ['copy-html']).on('change', browserSync.reload);
 })
 
-gulp.task('default', ['copy-html', 'copy-js', 'copy-data', 'copy-img', 'serve', 'watch']);
+gulp.task('default', ['copy-html', 'copy-js', 'copy-data', 'min-css', 'copy-img', 'serve', 'watch']);
