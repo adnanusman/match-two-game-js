@@ -6,7 +6,7 @@ h1 {
   text-align: center;
 }
 
-.wrapper {
+#wrapper {
   max-width: 1080px;
   display: flex;
   flex-flow: row wrap;
@@ -70,13 +70,28 @@ h1 {
   align-items: baseline;
 }
 
+#selects {
+  margin-left: 15px;
+  font-weight: 900;
+  font-size: 22px;
+}
+
+#levels {
+  background-color: #444;
+  color: #eee;
+  margin-left: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#levels:hover {
+  background-color: #eee;
+  color: #444;
+}
+
 .score {
   font-size: 22px;
   font-weight: 900;
-  /* temp additions until levels added  */
-  width: 50%;
-  text-align: right;
-  line-height: 1.5;
 }
 
 #reset {
